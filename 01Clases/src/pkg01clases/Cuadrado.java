@@ -28,6 +28,14 @@ public class Cuadrado {
             System.out.println(linea);
         }
     }
+    
+    public int getArea(){
+        return lado * lado;
+    }
+    
+    public int getPerimetro(){
+        return lado * 4;
+    }
        
-
+    
 }

@@ -21,5 +21,15 @@ public class Rectangulo {
             System.out.println(linea);
         }
     }
+    
+    
+    public int getArea(){
+        return lado1 * lado2;
+    }
+    
+    public int getPerimetro(){
+        return lado1 * 2 + lado2 * 2;
+    }
+       
 
 }
