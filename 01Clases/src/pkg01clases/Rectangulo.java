@@ -1,6 +1,6 @@
 package pkg01clases;
 
-public class Rectangulo extends Figura{
+public class Rectangulo implements Figura{
 
     public int lado1;
     public int lado2;
@@ -8,7 +8,6 @@ public class Rectangulo extends Figura{
     public Rectangulo(int a, int b) {
         this.lado1 = a;
         this.lado2 = b;
-        this.nombre = "Rectangulo";
     }
 
     @Override
@@ -22,6 +21,11 @@ public class Rectangulo extends Figura{
             }
             System.out.println(linea);
         }
+    }
+    
+    @Override
+    public void imprimirNombre(){
+        System.out.println("rectángulo");
     }
     
     

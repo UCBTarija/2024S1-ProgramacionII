@@ -54,6 +54,7 @@ public class Main {
         ArrayList<Figura> lista3 = new ArrayList();
         lista3.add(new Cuadrado(3));
         lista3.add(new Rectangulo(2,4));
+        lista3.add(new Perro());
         
         for(int i = 0; i < lista3.size(); i++){
             Figura f = lista3.get(i);

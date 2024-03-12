@@ -1,12 +1,11 @@
 package pkg01clases;
 
-public class Cuadrado extends Figura{
+public class Cuadrado implements Figura{
 
     public int lado;
 
     public Cuadrado(int a) {
         this.lado = a;
-        this.nombre = "cuadrado";
     }
 
     public Cuadrado(String s) {
@@ -31,6 +30,11 @@ public class Cuadrado extends Figura{
         }
     }
     
+    @Override
+    public void imprimirNombre(){
+        System.out.println("cuadrado");
+    }
+
     public int getArea(){
         return lado * lado;
     }
