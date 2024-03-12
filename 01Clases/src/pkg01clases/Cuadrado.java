@@ -1,11 +1,12 @@
 package pkg01clases;
 
-public class Cuadrado {
+public class Cuadrado extends Figura{
 
     public int lado;
 
     public Cuadrado(int a) {
         this.lado = a;
+        this.nombre = "cuadrado";
     }
 
     public Cuadrado(String s) {
@@ -17,6 +18,7 @@ public class Cuadrado {
         return c;
     }
 
+    @Override
     public void dibujar() {
         String linea;
 

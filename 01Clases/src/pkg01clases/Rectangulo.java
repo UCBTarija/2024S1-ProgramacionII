@@ -1,6 +1,6 @@
 package pkg01clases;
 
-public class Rectangulo {
+public class Rectangulo extends Figura{
 
     public int lado1;
     public int lado2;
@@ -8,8 +8,10 @@ public class Rectangulo {
     public Rectangulo(int a, int b) {
         this.lado1 = a;
         this.lado2 = b;
+        this.nombre = "Rectangulo";
     }
 
+    @Override
     public void dibujar() {
         String linea;
 

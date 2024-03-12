@@ -16,40 +16,50 @@ public class Main {
         r.dibujar();
         System.out.println(r.getPerimetro());*/
         
-        ArrayList<Rectangulo> lista = new ArrayList();
-        lista.add(new Rectangulo(1,2));
+//        ArrayList<Rectangulo> lista = new ArrayList();
+//        lista.add(new Rectangulo(1,2));
+//        
+//        lista.add(new Rectangulo(2,2));
+//        lista.add(new Rectangulo(2,3));
+//        lista.add(new Rectangulo(3,1));
+//        
+//        System.out.println(lista.size());
+//        
+//        for(int i = 0; i < lista.size(); i++){
+//            Rectangulo a = lista.get(i);
+//            a.dibujar();            
+//        }
+//        
+//        ArrayList lista2 = new ArrayList();
+//        lista2.add(new Cuadrado(3));
+//        lista2.add(new Rectangulo(2,3));
+//        
+//        for(int i = 0; i < lista2.size(); i++){
+//            Object o = lista2.get(i);
+//            
+//            if(o instanceof Cuadrado){
+//                Cuadrado c = (Cuadrado)lista2.get(i);
+//                c.dibujar();
+//            }
+//            
+//            if(o instanceof Rectangulo){
+//                Rectangulo c = (Rectangulo)lista2.get(i);
+//                c.dibujar();
+//            }
+//        }
         
-        lista.add(new Rectangulo(2,2));
-        lista.add(new Rectangulo(2,3));
-        lista.add(new Rectangulo(3,1));
+        System.out.println("================");
         
-        System.out.println(lista.size());
         
-        for(int i = 0; i < lista.size(); i++){
-            Rectangulo a = lista.get(i);
-            a.dibujar();            
+        ArrayList<Figura> lista3 = new ArrayList();
+        lista3.add(new Cuadrado(3));
+        lista3.add(new Rectangulo(2,4));
+        
+        for(int i = 0; i < lista3.size(); i++){
+            Figura f = lista3.get(i);
+            f.dibujar();
+            f.imprimirNombre();
         }
-        
-        ArrayList lista2 = new ArrayList();
-        lista2.add(new Cuadrado(3));
-        lista2.add(new Rectangulo(2,3));
-        
-        for(int i = 0; i < lista2.size(); i++){
-            Object o = lista2.get(i);
-            
-            if(o instanceof Cuadrado){
-                Cuadrado c = (Cuadrado)lista2.get(i);
-                c.dibujar();
-            }
-            
-            if(o instanceof Rectangulo){
-                Rectangulo c = (Rectangulo)lista2.get(i);
-                c.dibujar();
-            }
-        }
-        
-        
-        
     }
     
 }
