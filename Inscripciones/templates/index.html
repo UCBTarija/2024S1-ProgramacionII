@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<p th:text="${welcome}">Welcome to our grocery store!</p>
+
+<table border="1">
+    <tr th:each="gestion : ${gestiones}">
+        <td th:text="${gestion.getInteger('id')}">1</td>
+        <td th:text="${gestion.getString('nombre')}">2024</td>
+    </tr>
+</table>
+
+</body>
+
+</html>
