@@ -1,6 +1,8 @@
 
 package ucb.programacionii.inventario;
 
+import java.util.Random;
+
 
 public class Persona {
 
@@ -39,4 +41,8 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public static int getNextId(){
+        Random rnd = new Random();
+        return rnd.nextInt();
+    }
 }

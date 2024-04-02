@@ -2,6 +2,7 @@ package ucb.programacionii.inventario;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +19,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
         cargar();
         mostrar();
     }
@@ -56,7 +57,8 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +83,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(this);
 
-        jButton1.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this);
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(this);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,9 +97,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAgregar))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -102,10 +110,12 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnEliminar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -120,15 +130,41 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         if (evt.getSource() == btnModificar) {
             Principal.this.btnModificarActionPerformed(evt);
         }
+        else if (evt.getSource() == btnAgregar) {
+            Principal.this.btnAgregarActionPerformed(evt);
+        }
+        else if (evt.getSource() == btnEliminar) {
+            Principal.this.btnEliminarActionPerformed(evt);
+        }
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Persona persona = personas.get(tblDatos.getSelectedRow());
+
         PersonaForm form = new PersonaForm(this, true);
-        if(form.editPersona(persona)){
+        if (form.editPersona(persona)) {
             mostrar();
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        PersonaForm form = new PersonaForm(this, true);
+        if (form.createPersona()) {
+            personas.add(form.getPersona());
+            mostrar();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        Persona persona = personas.get(tblDatos.getSelectedRow());
+        int opcion = JOptionPane.showConfirmDialog(null,
+                "Desea eliminar la persona " + persona.getNombre());
+        if(opcion == 0){
+            personas.remove(persona);
+            mostrar();
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,8 +200,9 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables

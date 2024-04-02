@@ -22,10 +22,15 @@ public class PersonaForm extends javax.swing.JDialog implements ActionListener {
     }
     
     public boolean createPersona () {
+        this.persona = new Persona(Persona.getNextId(), 0, "");
+
         acepted = false;
         txtCi.setText("");
         txtNombre.setText("");
+
         setVisible(true);
+        
+        
         return acepted;
     }
         
