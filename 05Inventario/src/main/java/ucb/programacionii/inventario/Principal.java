@@ -102,9 +102,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -126,8 +128,6 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         if(form.editPersona(persona)){
             mostrar();
         }
-
-
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
