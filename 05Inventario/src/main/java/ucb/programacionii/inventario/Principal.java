@@ -1,9 +1,11 @@
 package ucb.programacionii.inventario;
 
+import ucb.programacionii.inventario.domain.Persona;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import ucb.programacionii.inventario.domain.PersonaRepository;
+import ucb.programacionii.inventario.infrastructure.PeronaReporitosyImpl;
 
 /**
  *
@@ -11,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame implements ActionListener {
 
-    private final ArrayList<Persona> personas = new ArrayList();
+    private PersonaRepository repository;
 
     /**
      * Creates new form Principal
@@ -20,23 +22,25 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         initComponents();
         setLocationRelativeTo(null);
 
+        repository = new PeronaReporitosyImpl();
+        
         cargar();
-        mostrar();
+        mostrar();              
     }
 
     private void cargar() {
-        personas.clear();
-        personas.add(new Persona(1, 1000, "JUAN1"));
-        personas.add(new Persona(2, 1001, "JUAN2"));
-        personas.add(new Persona(3, 1002, "JUAN3"));
-        personas.add(new Persona(4, 1003, "JUAN4"));
+        repository.store(new Persona(1, 1000, "JUAN1"));
+        repository.store(new Persona(1, 1000, "JUAN1"));
+        repository.store(new Persona(2, 1001, "JUAN2"));
+        repository.store(new Persona(3, 1002, "JUAN3"));
+        repository.store(new Persona(4, 1003, "JUAN4"));
     }
 
     private void mostrar() {
         DefaultTableModel model = (DefaultTableModel) tblDatos.getModel();
         model.setRowCount(0);
 
-        for (Persona persona : personas) {
+        for (Persona persona : repository.getAll()) {
             model.addRow(new Object[]{
                 persona.getCi(),
                 persona.getNombre(),
@@ -139,30 +143,38 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        Persona persona = personas.get(tblDatos.getSelectedRow());
-
-        PersonaForm form = new PersonaForm(this, true);
-        if (form.editPersona(persona)) {
-            mostrar();
+        try {
+            int id = Integer.parseInt(tblDatos.getModel().getValueAt(tblDatos.getSelectedRow(), 2).toString());
+            Persona persona = repository.get(id);
+            PersonaForm form = new PersonaForm(this, true);
+            if (form.editPersona(persona)) {
+                mostrar();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         PersonaForm form = new PersonaForm(this, true);
         if (form.createPersona()) {
-            personas.add(form.getPersona());
+            repository.store(form.getPersona());
             mostrar();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        Persona persona = personas.get(tblDatos.getSelectedRow());
-        int opcion = JOptionPane.showConfirmDialog(null,
-                "Desea eliminar la persona " + persona.getNombre());
-        if(opcion == 0){
-            personas.remove(persona);
-            mostrar();
+        try {
+            int id = Integer.parseInt(tblDatos.getModel().getValueAt(tblDatos.getSelectedRow(), 2).toString());
+            Persona persona = repository.get(id);
+            int opcion = JOptionPane.showConfirmDialog(null,
+                    "Desea eliminar la persona " + persona.getNombre());
+            if (opcion == 0) {
+                repository.remove(persona);
+                mostrar();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

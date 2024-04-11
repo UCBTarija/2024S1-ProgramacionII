@@ -1,5 +1,6 @@
 package ucb.programacionii.inventario;
 
+import ucb.programacionii.inventario.domain.Persona;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 

@@ -1,5 +1,5 @@
 
-package ucb.programacionii.inventario;
+package ucb.programacionii.inventario.domain;
 
 import java.util.Random;
 
