@@ -3,7 +3,6 @@ package ucb.programacionii.inventario.domain;
 
 import java.util.Random;
 
-
 public class Persona {
 
     private int id;

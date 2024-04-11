@@ -2,10 +2,14 @@ package ucb.programacionii.inventario;
 
 import ucb.programacionii.inventario.domain.Persona;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ucb.programacionii.inventario.domain.PersonaRepository;
-import ucb.programacionii.inventario.infrastructure.PeronaReporitosyImpl;
+import ucb.programacionii.inventario.infrastructure.PersonaRepositoryImpl;
 
 /**
  *
@@ -22,10 +26,10 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         initComponents();
         setLocationRelativeTo(null);
 
-        repository = new PeronaReporitosyImpl();
-        
+        repository = new PersonaRepositoryImpl();
+
         cargar();
-        mostrar();              
+        mostrar();
     }
 
     private void cargar() {
@@ -63,6 +67,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +98,9 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(this);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(this);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +113,8 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnAgregar))
+                    .addComponent(btnAgregar)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,6 +129,8 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                         .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -134,11 +145,14 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         if (evt.getSource() == btnModificar) {
             Principal.this.btnModificarActionPerformed(evt);
         }
+        else if (evt.getSource() == btnEliminar) {
+            Principal.this.btnEliminarActionPerformed(evt);
+        }
         else if (evt.getSource() == btnAgregar) {
             Principal.this.btnAgregarActionPerformed(evt);
         }
-        else if (evt.getSource() == btnEliminar) {
-            Principal.this.btnEliminarActionPerformed(evt);
+        else if (evt.getSource() == jButton1) {
+            Principal.this.jButton1ActionPerformed(evt);
         }
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,6 +192,22 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/ronal/Escritorio/tmp/demo.db");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from demo");
+            while (rs.next()) {
+                // read the result set
+                System.out.println("id = " + rs.getInt("id"));
+                System.out.println("name = " + rs.getString("nombre"));
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +245,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables

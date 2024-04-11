@@ -6,7 +6,7 @@ import ucb.programacionii.inventario.domain.Persona;
 import ucb.programacionii.inventario.domain.PersonaRepository;
 
 
-public class PeronaReporitosyImpl implements PersonaRepository{
+public class PersonaRepositoryImpl implements PersonaRepository{
 
     private final ArrayList<Persona> personas = new ArrayList();
     
