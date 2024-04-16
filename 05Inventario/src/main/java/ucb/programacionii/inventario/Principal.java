@@ -17,7 +17,7 @@ import ucb.programacionii.inventario.infrastructure.PersonaRepositoryImpl;
  */
 public class Principal extends javax.swing.JFrame implements ActionListener {
 
-    private PersonaRepository repository;
+    private final PersonaRepository repository;
 
     /**
      * Creates new form Principal
@@ -27,17 +27,8 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         repository = new PersonaRepositoryImpl();
-
-        cargar();
+        
         mostrar();
-    }
-
-    private void cargar() {
-        repository.store(new Persona(1, 1000, "JUAN1"));
-        repository.store(new Persona(1, 1000, "JUAN1"));
-        repository.store(new Persona(2, 1001, "JUAN2"));
-        repository.store(new Persona(3, 1002, "JUAN3"));
-        repository.store(new Persona(4, 1003, "JUAN4"));
     }
 
     private void mostrar() {

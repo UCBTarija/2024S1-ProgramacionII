@@ -10,14 +10,26 @@ public class PersonaRepositoryImpl implements PersonaRepository{
 
     private final ArrayList<Persona> personas = new ArrayList();
     
+    public PersonaRepositoryImpl(){
+        this.init();
+    }
+    
+    private void init(){
+        this.store(new Persona(1, 1000, "JUAN1"));
+        this.store(new Persona(1, 1000, "JUAN1"));
+        this.store(new Persona(2, 1001, "JUAN2"));
+        this.store(new Persona(3, 1002, "JUAN3"));
+        this.store(new Persona(4, 1003, "JUAN4"));
+    }
+
     @Override
-    public Persona get(int id) throws Exception{
+    public Persona get(int id){
         for(Persona persona : personas){
             if(persona.getId() == id){
                 return persona;
             }
         }
-        throw new Exception("Objeto no econtrado");
+        return null;
     }
 
     @Override
