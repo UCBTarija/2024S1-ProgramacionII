@@ -186,11 +186,10 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/ronal/Escritorio/tmp/demo.db");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/ronal/NetBeansProjects/ucb/05Inventario/data/datos.db");
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from demo");
+            ResultSet rs = statement.executeQuery("select * from persona");
             while (rs.next()) {
-                // read the result set
                 System.out.println("id = " + rs.getInt("id"));
                 System.out.println("name = " + rs.getString("nombre"));
             }
