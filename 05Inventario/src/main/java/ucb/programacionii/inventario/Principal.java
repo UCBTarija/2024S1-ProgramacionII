@@ -4,6 +4,7 @@ import ucb.programacionii.inventario.domain.Persona;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -186,7 +187,10 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/ronal/NetBeansProjects/ucb/05Inventario/data/datos.db");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/ucb_prog2", "ronal", "Warrior2");
+            //Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:FREE", "sys as sysdba", "oracle");
+            //Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/ronal/NetBeansProjects/ucb/05Inventario/data/datos.db");
+
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from persona");
             while (rs.next()) {
