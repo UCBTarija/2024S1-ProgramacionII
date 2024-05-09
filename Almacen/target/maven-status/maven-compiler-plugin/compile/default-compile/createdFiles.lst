@@ -1,0 +1,9 @@
+ucb/programacionii/almacen/Principal$1.class
+ucb/programacionii/almacen/Principal.class
+ucb/programacionii/almacen/FrmArticulo.class
+ucb/programacionii/almacen/aplicacion/ArticulosService.class
+ucb/programacionii/almacen/infraestructura/pgsql/ArticuloRepositoryImpl.class
+ucb/programacionii/almacen/infraestructura/pgsql/DB.class
+ucb/programacionii/almacen/dominio/ArticuloRepository.class
+ucb/programacionii/almacen/FrmArticulo$1.class
+ucb/programacionii/almacen/dominio/Articulo.class
