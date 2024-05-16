@@ -19,7 +19,8 @@ public class ArticulosService {
     // (C)REATE
     public Articulo createArticulo(
             String codigo,
-            String nombre
+            String nombre,
+            float precio
     ) throws Exception {
         // 1: validación de datos
 
@@ -27,7 +28,7 @@ public class ArticulosService {
         // 2.1: obtiene el ID para el nuevo objeto
         int id = this.articuloRepository.nextIdentity();
         // 2.2: crea el nuevo objeto
-        Articulo articulo = new Articulo( id, codigo, nombre);
+        Articulo articulo = new Articulo( id, codigo, nombre, precio);
         
         // 3: guarda el objeto
         if (this.articuloRepository.store(articulo)) {

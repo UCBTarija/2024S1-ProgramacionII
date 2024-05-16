@@ -63,7 +63,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 323, Short.MAX_VALUE)
+            .addGap(0, 564, Short.MAX_VALUE)
         );
 
         mniArticulos.setText("Articulos");
@@ -80,7 +80,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(escritorio)
@@ -101,10 +101,10 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     // Code for dispatching events from components to event handlers.
 
     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        if (evt.getSource() == mniListaArticulos) {
+        if (evt.getSource() == btnArticulos) {
             Principal.this.mniListaArticulosActionPerformed(evt);
         }
-        else if (evt.getSource() == btnArticulos) {
+        else if (evt.getSource() == mniListaArticulos) {
             Principal.this.mniListaArticulosActionPerformed(evt);
         }
     }// </editor-fold>//GEN-END:initComponents

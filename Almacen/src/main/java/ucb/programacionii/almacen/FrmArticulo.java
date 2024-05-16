@@ -5,6 +5,7 @@
 package ucb.programacionii.almacen;
 
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import ucb.programacionii.almacen.aplicacion.ArticulosService;
@@ -111,20 +112,20 @@ public class FrmArticulo extends javax.swing.JInternalFrame implements ActionLis
 
         tblArticulos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "id", "Código", "Descripción"
+                "id", "Código", "Descripción", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -180,15 +181,22 @@ public class FrmArticulo extends javax.swing.JInternalFrame implements ActionLis
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ArticulosService articulosService = new ArticulosService(new ArticuloRepositoryImpl());      
-        ArrayList<Articulo> articulos =  articulosService.search(txtFiltro.getText());
+        ArticulosService articulosService = new ArticulosService(new ArticuloRepositoryImpl());
+        ArrayList<Articulo> articulos = articulosService.search(txtFiltro.getText());
         DefaultTableModel model = (DefaultTableModel) tblArticulos.getModel();
         
+        DecimalFormat df = new DecimalFormat("0.00");
+
         model.setRowCount(0);
-        for(Articulo articulo : articulos){
-            model.addRow(new Object[]{articulo.getId(), articulo.getCodigo(), articulo.getNombre()});
+        for (Articulo articulo : articulos) {
+            model.addRow(new Object[]{
+                articulo.getId(),
+                articulo.getCodigo(),
+                articulo.getNombre(),
+                df.format(articulo.getPrecio())
+            });
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

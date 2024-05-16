@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,15 +19,17 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
 
     @Override
     public boolean store(Articulo articulo) {
-        String sql = "INSERT INTO articulo (id, codigo, nombre) "
-                + "VALUES (?, ?, ?) "
+        String sql = "INSERT INTO producto (id, codigo, nombre,precio) "
+                + "VALUES (?, ?, ?, ?) "
                 + "ON CONFLICT DO UPDATE SET "
                 + "codigo = EXCLUDED.codigo "
-                + "nombre = EXCLUDED.nombre";
+                + "nombre = EXCLUDED.nombre "
+                + "precio = EXCLUDED.precio ";
         try (PreparedStatement stm = DB.getConnection().prepareStatement(sql)) {            
             stm.setInt(1, articulo.getId());
             stm.setString(2, articulo.getCodigo());
             stm.setString(3, articulo.getNombre());
+            stm.setFloat(4, articulo.getPrecio());
             
             return stm.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -38,7 +41,7 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
 
     @Override
     public boolean delete(Articulo articulo) {
-        String sql = "DELETE FROM articulo WHERE id = ?";
+        String sql = "DELETE FROM producto WHERE id = ?";
         try (PreparedStatement stm = DB.getConnection().prepareStatement(sql)) {            
             stm.setInt(1, articulo.getId());
             
@@ -54,7 +57,7 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
     public Articulo getById(int id) {
         Articulo articulo = null;
 
-        String sql = "SELECT * FROM articulo WHERE id = ?";
+        String sql = "SELECT * FROM producto WHERE id = ?";
         try (PreparedStatement stm = DB.getConnection().prepareStatement(sql)) {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
@@ -63,7 +66,8 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
                 articulo = new Articulo(
                         rs.getInt("id"),
                         rs.getString("codigo"),
-                        rs.getString("nombre")
+                        rs.getString("nombre"),
+                        rs.getFloat("precio")
                 );
             }
         } catch (SQLException ex) {
@@ -77,20 +81,23 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
     public ArrayList<Articulo> search(String filtro) {
         ArrayList<Articulo> lista = new ArrayList();
 
-        String sql = "SELECT * FROM articulo "
+        String sql = "SELECT * FROM producto "
                 + "WHERE nombre LIKE ? "
                 + "OR codigo = ?";
+        
+        DecimalFormat df = new DecimalFormat("0.00");
 
         try (PreparedStatement stm = DB.getConnection().prepareStatement(sql)) {
             stm.setString(1, "%" + filtro + "%");
             stm.setString(2, filtro);
             ResultSet rs = stm.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Articulo articulo = new Articulo(
                         rs.getInt("id"),
                         rs.getString("codigo"),
-                        rs.getString("nombre")
+                        rs.getString("nombre"),
+                        rs.getFloat("precio")
                 );
                 lista.add(articulo);
             }
@@ -104,7 +111,7 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
     @Override
     public int nextIdentity() {
         try (Statement stm = DB.getConnection().createStatement()) {
-            ResultSet rs = stm.executeQuery("SELECT nextval('articulo_id_seq') id");
+            ResultSet rs = stm.executeQuery("SELECT nextval('producto_id_seq') id");
             if (rs.next()) {
                 int id = rs.getInt(1);
                 return id;
