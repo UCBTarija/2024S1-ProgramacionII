@@ -1,7 +1,8 @@
-/home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/aplicacion/ArticulosService.java
 /home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/dominio/Articulo.java
 /home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/infraestructura/pgsql/ArticuloRepositoryImpl.java
-/home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/FrmArticulo.java
+/home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/aplicacion/ArticuloService.java
+/home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/ArticuloList.java
 /home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/infraestructura/pgsql/DB.java
 /home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/dominio/ArticuloRepository.java
+/home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/ArticuloForm.java
 /home/ronal/NetBeansProjects/ucb/Almacen/src/main/java/ucb/programacionii/almacen/Principal.java

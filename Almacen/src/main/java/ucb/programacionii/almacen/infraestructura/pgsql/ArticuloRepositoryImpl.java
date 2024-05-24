@@ -21,9 +21,9 @@ public class ArticuloRepositoryImpl implements ArticuloRepository {
     public boolean store(Articulo articulo) {
         String sql = "INSERT INTO producto (id, codigo, nombre,precio) "
                 + "VALUES (?, ?, ?, ?) "
-                + "ON CONFLICT DO UPDATE SET "
-                + "codigo = EXCLUDED.codigo "
-                + "nombre = EXCLUDED.nombre "
+                + "ON CONFLICT(id) DO UPDATE SET "
+                + "codigo = EXCLUDED.codigo, "
+                + "nombre = EXCLUDED.nombre, "
                 + "precio = EXCLUDED.precio ";
         try (PreparedStatement stm = DB.getConnection().prepareStatement(sql)) {            
             stm.setInt(1, articulo.getId());

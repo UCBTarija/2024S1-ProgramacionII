@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import ucb.programacionii.almacen.aplicacion.ArticulosService;
+import ucb.programacionii.almacen.aplicacion.ArticuloService;
 import ucb.programacionii.almacen.dominio.Articulo;
 import ucb.programacionii.almacen.infraestructura.pgsql.ArticuloRepositoryImpl;
 
@@ -16,12 +16,12 @@ import ucb.programacionii.almacen.infraestructura.pgsql.ArticuloRepositoryImpl;
  *
  * @author ronal
  */
-public class FrmArticulo extends javax.swing.JInternalFrame implements ActionListener {
+public class ArticuloList extends javax.swing.JInternalFrame implements ActionListener {
 
     /**
      * Creates new form FrmArticulo
      */
-    public FrmArticulo() {
+    public ArticuloList() {
         initComponents();
     }
 
@@ -81,8 +81,10 @@ public class FrmArticulo extends javax.swing.JInternalFrame implements ActionLis
         );
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(this);
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(this);
 
         btnEliminar.setText("Eliminar");
 
@@ -176,12 +178,18 @@ public class FrmArticulo extends javax.swing.JInternalFrame implements ActionLis
 
     public void actionPerformed(java.awt.event.ActionEvent evt) {
         if (evt.getSource() == btnBuscar) {
-            FrmArticulo.this.btnBuscarActionPerformed(evt);
+            ArticuloList.this.btnBuscarActionPerformed(evt);
+        }
+        else if (evt.getSource() == btnNuevo) {
+            ArticuloList.this.btnNuevoActionPerformed(evt);
+        }
+        else if (evt.getSource() == btnModificar) {
+            ArticuloList.this.btnModificarActionPerformed(evt);
         }
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ArticulosService articulosService = new ArticulosService(new ArticuloRepositoryImpl());
+        ArticuloService articulosService = new ArticuloService(new ArticuloRepositoryImpl());
         ArrayList<Articulo> articulos = articulosService.search(txtFiltro.getText());
         DefaultTableModel model = (DefaultTableModel) tblArticulos.getModel();
         
@@ -196,8 +204,21 @@ public class FrmArticulo extends javax.swing.JInternalFrame implements ActionLis
                 df.format(articulo.getPrecio())
             });
         }
-
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        ArticuloForm form = new ArticuloForm(null, true);
+        form.nuevoArticulo();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int row = tblArticulos.getSelectedRow(); // fila seleccionada
+        int col = 0; //columna oculta donde está el ID
+        int articuloId = (Integer)tblArticulos.getModel().getValueAt(row, col);
+        
+        ArticuloForm form = new ArticuloForm(null, true);
+        form.modificarArticulo(articuloId);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

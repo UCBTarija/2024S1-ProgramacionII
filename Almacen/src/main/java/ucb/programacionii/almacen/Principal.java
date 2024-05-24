@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import ucb.programacionii.almacen.aplicacion.ArticulosService;
+import ucb.programacionii.almacen.aplicacion.ArticuloService;
 import ucb.programacionii.almacen.infraestructura.pgsql.ArticuloRepositoryImpl;
 
 /**
@@ -110,7 +110,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniListaArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniListaArticulosActionPerformed
-        FrmArticulo frm = new FrmArticulo();
+        ArticuloList frm = new ArticuloList();
         escritorio.add(frm);
         frm.show();
     }//GEN-LAST:event_mniListaArticulosActionPerformed
